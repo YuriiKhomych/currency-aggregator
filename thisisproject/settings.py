@@ -121,3 +121,9 @@ CHANNEL_LAYERS = {
         "CONFIG": {"hosts": [("redis", 6379)]},
     }
 }
+CELERY_BEAT_SCHEDULE = {
+    "get_currencies": {
+        "task": "currencies.tasks.get_currencies",
+        "schedule": 10.0
+    }
+}
