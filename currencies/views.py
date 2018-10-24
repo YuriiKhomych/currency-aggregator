@@ -23,4 +23,4 @@ class CurrencyCreateView(CreateView):
     template_name = 'currencies/new_currency.html'
     form_class = CurrencyRateForm
     queryset = CurrencyRate.objects.all()
-    success_url = '/currencies/rate/'
+    success_url = '/currencies/rates/'
