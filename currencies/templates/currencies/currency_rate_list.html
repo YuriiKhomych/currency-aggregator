@@ -1,0 +1,26 @@
+{% extends 'currencies/base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Currencies</h1>
+            <p>Have a look around to see some currencies.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for currency in object_list %}
+            <p><b>Currency</b></p>
+            <p>Base: {{ currency.base }}</p>
+            <p>Target: {{ currency.target }}</p>
+            <p>Price: {{ currency.price }}</p>
+            <hr>
+
+        {% endfor %}
+        {% if not object_list %}
+            <p>There is not currencies yet)</p>
+        {% endif %}
+    </div>
+
+{% endblock %}
