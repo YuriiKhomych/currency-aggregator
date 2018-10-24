@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Currencies</title>
+  <!-- Bulma styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-6 is-offset-3">
+          <div id="currencies"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Create WebSocket object.
+    const currenciesws = new WebSocket(
+      'ws://' + window.location.host + '/ws/currencies/'
+    );
+
+     // Add value to div with id currencies.
+    const addCurrency = (base, target, price) => {
+      document.querySelector('#currencies').innerHTML = `
+        <article class="message is-success">
+          <div class="message-header">
+            <p>Currency ${base}-${target}</p>
+          </div>
+          <div class="message-body">${price}</div>
+        </article>
+      ` + document.querySelector('#currencies').innerHTML
+    };
+
+    // Event trigger when get message from server
+    currenciesws.onmessage = (event_) => {
+      const data = JSON.parse(event_.data);
+      const base = data['base'];
+      const target = data['target'];
+      const price = data['price'];
+      addCurrency(base, target, price)
+    };
+
+    // Event trigger when get message when connection closed
+    currenciesws.onclose = (event_) => {
+      console.error('Currencies socket closed')
+    }
+  </script>
+</body>
+</html>
