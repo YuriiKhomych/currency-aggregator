@@ -8,4 +8,5 @@ set -o xtrace
 
 python manage.py makemigrations currencies
 python manage.py migrate
+python manage.py loaddata currencies.json
 python manage.py runserver 0.0.0.0:8000

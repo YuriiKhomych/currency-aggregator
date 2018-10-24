@@ -1,0 +1,4 @@
+[
+  {"model": "currencies.currencyrate", "pk": 1, "fields": {"base": "BTC", "target": "USD"}},
+  {"model": "currencies.currencyrate", "pk": 2, "fields": {"base": "BTC", "target": "UAH"}}
+]
