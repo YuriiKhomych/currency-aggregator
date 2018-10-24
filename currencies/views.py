@@ -5,6 +5,7 @@ from .models import CurrencyRate
 
 
 class CurrencyOnlineView(ListView):
+    template_name = 'currencies/currency_online.html'
     queryset = CurrencyRate.objects.all()
 
 
