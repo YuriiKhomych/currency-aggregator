@@ -22,3 +22,15 @@ def get_currencies():
         logger.info(price)
         logger.info(f'Update rate for {rate.base}-{rate.target}: {rate.price}')
         rate.update_currency_rate(price)
+        # Send message with type 'currencies.currency' through channel_layer
+        # for all consumers, which added to group 'currencies'.
+        async_to_sync(channel_layer.group_send)(
+            "currencies", {
+                "type": "currencies.currency",
+                "text": json.dumps({
+                    "base": rate.base,
+                    "target": rate.target,
+                    "price": price,
+                })
+            }
+        )
