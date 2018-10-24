@@ -1,3 +1,6 @@
-from channels.routing import ProtocolTypeRouter
+from channels.routing import ProtocolTypeRouter, URLRouter
+from currencies.routing import websocket_urlpatterns
 
-application = ProtocolTypeRouter({})
+application = ProtocolTypeRouter({
+    "websocket": URLRouter(websocket_urlpatterns)
+})
